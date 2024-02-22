@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $category = \App\Models\Category::paginate(5);
+        $category = Category::paginate(5);
         // $category = DB::table('category')
         //     ->where('name', 'like', '%' . $request->search . '%')
         //     ->paginate(10);

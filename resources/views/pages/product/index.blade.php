@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Products')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -13,20 +13,20 @@
             <div class="section-header">
                 <h1>{{ Auth::user()->role }}</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('category.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">{{ Auth::user()->role }}</a></div>
-                    <div class="breadcrumb-item">category</div>
+                    <div class="breadcrumb-item">Product</div>
                 </div>
             </div>
             <div class="section-body">
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-12">
                         @include('layouts.alert')
                     </div>
-                </div> --}}
+                </div>
 
 
 
@@ -34,7 +34,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>Product</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
@@ -46,7 +46,7 @@
                                     </select>
                                 </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('user.index') }}">
+                                    <form method="GET" action="{{ route('product.create') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">
@@ -63,29 +63,40 @@
                                         <tr>
 
                                             <th>Name</th>
-
                                             <th>Image</th>
-                                            <th>Created At</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Status</th>
+                                            {{-- <th>Created At</th> --}}
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($category as $c)
+                                        @foreach ($product as $p)
                                             <tr>
 
-                                                <td>{{ $c->name }}</td>
+                                                <td>{{ $p->name }}</td>
+                                                <td>{{ $p->image }}</td>
+                                                <td>{{ $p->category->name }}</td>
                                                 <td>
-                                                    {{ $c->image }}
+                                                    {{ $p->price }}
+                                                </td>
+                                                <td>
+                                                    {{ $p->stock }}
+                                                </td>
+                                                <td>
+                                                    {{ $p->status == 1 ? 'active' : 'inakctive' }}
                                                 </td>
 
-                                                <td>{{ $c->created_at }}</td>
+                                                {{-- <td>{{ $p->created_at }}</td> --}}
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('category.edit', $c->id) }}'
+                                                        <a href='{{ route('category.edit', $p->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('category.destroy', $c->id) }}"
+                                                        <form action="{{ route('category.destroy', $p->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -103,7 +114,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $category->withQueryString()->links() }}
+                                    {{ $product->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

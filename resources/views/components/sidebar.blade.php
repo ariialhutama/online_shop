@@ -31,6 +31,18 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="menu-header">Product</li>
+            <li class="nav-item">
+                <a href="{{ route('product.index') }}" class="nav-link"><i
+                        class="fas fa-water"></i><span>Product</span></a>
+
+                {{-- <ul class="dropdown-menu">
+                    <li class=''>
+                        <a class="nav-link" href="{{ route('product.index') }}">baracayya</a>
+                    </li>
+                </ul> --}}
+            </li>
         </ul>
 
 

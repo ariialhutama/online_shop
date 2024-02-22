@@ -20,8 +20,10 @@ class ProductFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->text(),
             'image' => fake()->imageUrl(),
-            'price' => fake()->randomNumber(4),
-            'stock' => fake()->randomNumber(2),
+            'price' => fake()->randomFloat(2, 1, 100),
+            'stock' => fake()->numberBetween(1, 100),
+            'status'=>fake()->boolean(),
+            'is_favorite'=>fake()->boolean(),
             'category_id' => fake()->numberBetween(1, 4),
 
         ];
