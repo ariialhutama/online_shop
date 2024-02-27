@@ -75,7 +75,14 @@
                                             <tr>
 
                                                 <td>{{ $p->name }}</td>
-                                                <td>{{ $p->image }}</td>
+                                                <td>
+                                                    @if ($p->image)
+                                                        <img src="{{ asset('storage/products/' . $p->image) }}"
+                                                            alt="" width="200px" class="img-thumbnail">
+                                                    @else
+                                                        <span class="badge badge-danger">No Image</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $p->category->name }}</td>
                                                 <td>
                                                     {{ $p->price }}
@@ -84,19 +91,24 @@
                                                     {{ $p->stock }}
                                                 </td>
                                                 <td>
-                                                    {{ $p->status == 1 ? 'active' : 'inakctive' }}
+                                                    @if ($p->status == 1)
+                                                        <span class="badge badge-success">Active</span>
+                                                    @else
+                                                        <span class="badge badge-danger">Inactive</span>
+                                                    @endif
+                                                    {{-- {{ $p->status == 1 ? '<span class="badge badge-success">active</span>' : 'inakctive' }} --}}
                                                 </td>
 
-                                                {{-- <td>{{ $p->created_at }}</td> --}}
+                                                <td>{{ $p->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('category.edit', $p->id) }}'
+                                                        <a href='{{ route('product.edit', $p->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('category.destroy', $p->id) }}"
+                                                        <form action="{{ route('product.destroy', $p->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
